@@ -13,7 +13,7 @@ import java.util.List;
 public class UserService {
 
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     public void addUser(User user){
         entityManager.persist(user);
