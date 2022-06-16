@@ -46,10 +46,10 @@ public class UserController {
     public String updateUser(@ModelAttribute("user") @Valid User user,
                              BindingResult bindingResult){
 
-        if(bindingResult.hasErrors()) return "user/view";
+        if(!bindingResult.hasErrors())
+            userService.updateUser(user);
 
-        userService.updateUser(user);
-        return "redirect:/" + user.getId();
+        return "user/view";
     }
 
     @GetMapping("/{id}")
