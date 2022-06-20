@@ -9,12 +9,13 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 public class UserService {
 
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Transactional
     public void addUser(User user){
         entityManager.persist(user);
     }
@@ -27,10 +28,13 @@ public class UserService {
         return entityManager.find(User.class, id);
     }
 
+    @Transactional
     public void updateUser(User user){
+
         entityManager.merge(user);
     }
 
+    @Transactional
     public void deleteUser(int id){
         entityManager.remove(getUser(id));
     }
